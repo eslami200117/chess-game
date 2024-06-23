@@ -3,6 +3,7 @@
 #include<string>
 #include<vector>
 #include"ChessPiece.hpp"
+#include"Coordinate.hpp"
 
 enum Pieces { _King, _Queen,  _Rook, _Bishpo, _Knight, _Pawn, _Empty}; 
 
@@ -11,6 +12,7 @@ public:
     ChessBoard();
     ~ChessBoard() = default;
     void executeCommand(std::string command);
+    bool isValid(Coordinate);
     bool isDone();
     void show();
     void nextTurn();
