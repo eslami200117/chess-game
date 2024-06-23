@@ -1,7 +1,8 @@
 #pragma once
 
 #include<string>
-#include"Board.hpp"
+#include<vector>
+#include"ChessPiece.hpp"
 
 enum Pieces { _King, _Queen,  _Rook, _Bishpo, _Knight, _Pawn, _Empty}; 
 
@@ -16,6 +17,6 @@ public:
     std::string getTurn();
 
 private:
-    Board m_board;
+    std::vector<std::vector<ChessPiece *>> m_baord;
     bool m_turn;
 };

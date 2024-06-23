@@ -2,16 +2,15 @@
 
 #include<iostream>
 #include<vector>
-#include"Board.hpp"
 #include"Coordinate.hpp"
-
+#include"ChessBoard.hpp"
 
 
 class ChessPiece {
 public:
     ChessPiece();
     ~ChessPiece();
-    virtual std::vector<Coordinate>availableMoves(Board&) const = 0;
+    virtual std::vector<Coordinate>availableMoves(ChessBoard&) const = 0;
     Coordinate getCoordinate();
     void move(Coordinate);
 
@@ -26,36 +25,36 @@ protected:
 
 class King : public ChessPiece{
 public:
-    std::vector<Coordinate> availableMoves(Board&) const override;
+    std::vector<Coordinate> availableMoves(ChessBoard&) const override;
 private:
     bool m_isMoved;
 };
 
 class Queen : public ChessPiece{
 public:
-    std::vector<Coordinate> availableMoves(Board&) const override;
+    std::vector<Coordinate> availableMoves(ChessBoard&) const override;
 };
 
 class Rook : public ChessPiece{
 public:
-    std::vector<Coordinate> availableMoves(Board&) const override;
+    std::vector<Coordinate> availableMoves(ChessBoard&) const override;
 private:
     bool m_isMoved;
 };
 
 class Bishp : public ChessPiece{
 public:
-    std::vector<Coordinate> availableMoves(Board&) const override;
+    std::vector<Coordinate> availableMoves(ChessBoard&) const override;
 };
 
 class Knight : public ChessPiece{
 public:
-    std::vector<Coordinate> availableMoves(Board&) const override;
+    std::vector<Coordinate> availableMoves(ChessBoard&) const override;
 };
 
 class Pawn : public ChessPiece{
 public:
-    std::vector<Coordinate> availableMoves(Board&) const override;
+    std::vector<Coordinate> availableMoves(ChessBoard&) const override;
 private:
     bool m_isMoved;
 };
