@@ -3,6 +3,8 @@
 #include<string>
 #include"Board.hpp"
 
+enum Pieces { _King, _Queen,  _Rook, _Bishpo, _Knight, _Pawn, _Empty}; 
+
 class ChessBoard {
 public:
     ChessBoard();
