@@ -10,7 +10,7 @@ class ChessPiece {
 public:
     ChessPiece();
     ~ChessPiece();
-    virtual std::vector<Coordinate>availableMoves(ChessBoard&) const = 0;
+    virtual std::vector<Coordinate>availableMoves(ChessBoard&) const;
     Coordinate getCoordinate();
     void move(Coordinate);
     bool getColor();
@@ -26,7 +26,6 @@ protected:
 
 class King : public ChessPiece{
 public:
-    std::vector<Coordinate> availableMoves(ChessBoard&) const override;
 private:
     bool m_isMoved;
 };
@@ -50,12 +49,10 @@ public:
 
 class Knight : public ChessPiece{
 public:
-    std::vector<Coordinate> availableMoves(ChessBoard&) const override;
 };
 
 class Pawn : public ChessPiece{
 public:
-    std::vector<Coordinate> availableMoves(ChessBoard&) const override;
 private:
     bool m_isMoved;
 };
