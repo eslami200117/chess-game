@@ -68,3 +68,30 @@ void ChessBoard::printBoard() const {
         std::cout << '\n';
     }
 }
+
+
+bool ChessBoard::isDone(){
+    return false;
+}
+
+void ChessBoard::executeCommand(string command){
+
+}
+
+bool ChessBoard::isValid(Coordinate coordinate){
+    bool rangeValidate = false;
+    bool emptyValidate = false;
+    if(0 <= coordinate.x < 8 && 0 <= coordinate.y < 8){
+        rangeValidate = true;
+    }
+
+    if(m_board[coordinate.x][coordinate.y] == nullptr){
+        emptyValidate = true;
+    } else {
+        if(m_board[coordinate.x][coordinate.y]->getColor() == m_turn){
+            emptyValidate = true;
+        }
+    }
+
+    return rangeValidate && emptyValidate;
+}

@@ -5,16 +5,16 @@
 using namespace std;
 
 int main(){
+    string command;
     ChessBoard chessBoard;
     chessBoard.loadGame("/resource/board.txt");
-    chessBoard.show();
+    chessBoard.printBoard();
     while(!chessBoard.isDone()){
         cout<<"Player: " << chessBoard.getTurn() << " move: ";
-        string command;
         cin>>command;
         chessBoard.executeCommand(command);
         chessBoard.nextTurn();
-        chessBoard.show();
+        chessBoard.printBoard();
     }
 
     return 0;
