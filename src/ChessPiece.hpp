@@ -13,6 +13,7 @@ public:
     virtual std::vector<Coordinate>availableMoves(ChessBoard&) const = 0;
     Coordinate getCoordinate();
     void move(Coordinate);
+    bool getColor();
 
 protected:
     bool m_color;
@@ -42,7 +43,7 @@ private:
     bool m_isMoved;
 };
 
-class Bishp : public ChessPiece{
+class Bishop : public ChessPiece{
 public:
     std::vector<Coordinate> availableMoves(ChessBoard&) const override;
 };

@@ -2,6 +2,11 @@
 
 using namespace std;
 
+
+bool ChessPiece::getColor(){
+    return m_color;
+}
+
 vector<Coordinate> King::availableMoves(ChessBoard& chessBoard) const {
     vector<Coordinate> allPossibleMoves;
     for(auto jump = m_jump.cbegin(); jump != m_jump.cend(); jump++){
@@ -26,7 +31,7 @@ vector<Coordinate> Rook::availableMoves(ChessBoard& chessBoard) const {
     return allPossibleMoves;
 }
 
-vector<Coordinate> Bishp::availableMoves(ChessBoard& chessBoard) const {
+vector<Coordinate> Bishop::availableMoves(ChessBoard& chessBoard) const {
     vector<Coordinate> allPossibleMoves;
 
     return allPossibleMoves;

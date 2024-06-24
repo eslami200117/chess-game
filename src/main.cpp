@@ -6,6 +6,7 @@ using namespace std;
 
 int main(){
     ChessBoard chessBoard;
+    chessBoard.loadGame("/resource/board.txt");
     chessBoard.show();
     while(!chessBoard.isDone()){
         cout<<"Player: " << chessBoard.getTurn() << " move: ";
