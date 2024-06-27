@@ -1,4 +1,4 @@
-CC := g++
+CC := g++ -std=c++2a
 CXXFLAGS :=
 DBGFLAGS := -g
 CCOBJFLAGS := $(CXXFLAGS) -c
@@ -13,7 +13,7 @@ SRC_PATH := src
 DBG_PATH := debug
 
 # compile macros
-TARGET_NAME := chess.out
+TARGET_NAME := chess
 ifeq ($(OS),Windows_NT)
 	TARGET_NAME := $(addsuffix .exe,$(TARGET_NAME))
 endif
