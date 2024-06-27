@@ -14,6 +14,7 @@ public:
     Coordinate getCoordinate();
     void move(Coordinate);
     bool getColor();
+    virtual char getChar();
 
 protected:
     bool m_color;
@@ -26,6 +27,7 @@ protected:
 
 class King : public ChessPiece{
 public:
+    char getChar();
 private:
     bool m_isMoved;
 };
@@ -33,11 +35,13 @@ private:
 class Queen : public ChessPiece{
 public:
     std::vector<Coordinate> availableMoves(ChessBoard&) const override;
+    char getChar();
 };
 
 class Rook : public ChessPiece{
 public:
     std::vector<Coordinate> availableMoves(ChessBoard&) const override;
+    char getChar();
 private:
     bool m_isMoved;
 };
@@ -45,14 +49,17 @@ private:
 class Bishop : public ChessPiece{
 public:
     std::vector<Coordinate> availableMoves(ChessBoard&) const override;
+    char getChar();
 };
 
 class Knight : public ChessPiece{
 public:
+    char getChar();
 };
 
 class Pawn : public ChessPiece{
 public:
+    char getChar();
 private:
     bool m_isMoved;
 };

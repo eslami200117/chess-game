@@ -38,3 +38,27 @@ vector<Coordinate> Bishop::availableMoves(ChessBoard& chessBoard) const {
 }
 
 
+char King::getChar(){
+    return 'k';
+}
+
+char Queen::getChar(){
+    return 'q';
+}
+
+char Rook::getChar(){
+    return 'r';
+}
+
+char Bishop::getChar(){
+    return 'b';
+}
+
+char Knight::getChar(){
+    return 'kn';
+}
+
+char Pawn::getChar(){
+    return 'p';
+}
+
