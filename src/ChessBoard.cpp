@@ -2,7 +2,7 @@
 using namespace std;
 
 ChessBoard::ChessBoard()
-    : m_board(8, std::vector<std::shared_ptr<ChessPiece>>(8, nullptr))
+    : m_board(8, vector<shared_ptr<ChessPiece>>(8, nullptr))
     , m_turn(true) 
     {}
 
@@ -17,33 +17,61 @@ string ChessBoard::getTurn(){
 
 
 
-std::shared_ptr<ChessPiece> ChessBoard::charToPiece(char pieceChar, Coordinate coordinate) {
+shared_ptr<ChessPiece> ChessBoard::charToPiece(char pieceChar, Coordinate coordinate) {
     bool color = isupper(pieceChar); // White pieces are uppercase
     switch (tolower(pieceChar)) {
-        case 'k': return std::make_shared<King>(color, coordinate);
-        case 'q': return std::make_shared<Queen>(color, coordinate);
-        case 'r': return std::make_shared<Rook>(color, coordinate);
-        case 'b': return std::make_shared<Bishop>(color, coordinate);
-        case 'n': return std::make_shared<Knight>(color, coordinate);
-        case 'p': return std::make_shared<Pawn>(color, coordinate);
+        case 'k': return make_shared<King>(color, coordinate);
+        case 'q': return make_shared<Queen>(color, coordinate);
+        case 'r': return make_shared<Rook>(color, coordinate);
+        case 'b': return make_shared<Bishop>(color, coordinate);
+        case 'n': return make_shared<Knight>(color, coordinate);
+        case 'p': return make_shared<Pawn>(color, coordinate);
         default: return nullptr;
     }
 }
 
-void ChessBoard::loadGame(std::string filename) {
-    std::ifstream file(filename);
+
+void ChessBoard::loadGame(string filename) {
+    ifstream file(filename);
     if (!file.is_open()) {
-        std::cerr << "Error: Cannot open file " << filename << std::endl;
+        cerr << "Error: Cannot open file " << filename << endl;
+        return;
+    }
+    string line;
+
+    if (getline(file, line)) {
+        m_turn = (line == "white"); 
+    } else {
+        cerr << "Error: Failed to read the boolean value from the file" << endl;
         return;
     }
 
-    std::string line;
     int row = 0;
-    while (std::getline(file, line) && row < 8) {
+    while (getline(file, line) && row < 8) {
         for (int col = 0; col < 8 && col < line.size(); ++col) {
             m_board[row][col] = charToPiece(line[col], Coordinate(row, col));
         }
         ++row;
+    }
+
+    file.close();
+}
+
+
+void ChessBoard::saveGame(string filename) {
+    ofstream file(filename);
+    if (!file.is_open()) {
+        cerr << "Error: Cannot open file " << filename << endl;
+        return;
+    }
+
+    file << (m_turn ? "white" : "black") << endl;
+
+    for (int row = 0; row < 8; ++row) {
+        for (int col = 0; col < 8; ++col) {
+            file << m_board[row][col]->getChar();
+        }
+        file << endl;
     }
 
     file.close();
@@ -54,18 +82,16 @@ void ChessBoard::printBoard() const {
         for (const auto& piece : row) {
             if (piece) {
                 char pieceChar = '.';
-                if (dynamic_cast<King*>(piece.get())) pieceChar = piece->getColor() ? 'K' : 'k';
-                else if (dynamic_cast<Queen*>(piece.get())) pieceChar = piece->getColor() ? 'Q' : 'q';
-                else if (dynamic_cast<Rook*>(piece.get())) pieceChar = piece->getColor() ? 'R' : 'r';
-                else if (dynamic_cast<Bishop*>(piece.get())) pieceChar = piece->getColor() ? 'B' : 'b';
-                else if (dynamic_cast<Knight*>(piece.get())) pieceChar = piece->getColor() ? 'N' : 'n';
-                else if (dynamic_cast<Pawn*>(piece.get())) pieceChar = piece->getColor() ? 'P' : 'p';
-                std::cout << pieceChar;
+                if(piece != nullptr){
+                    pieceChar = piece->getChar();
+                    pieceChar = piece->getColor()? toupper(pieceChar):tolower(pieceChar);
+                }
+                cout << pieceChar;
             } else {
-                std::cout << '.';
+                cout << '.';
             }
         }
-        std::cout << '\n';
+        cout << '\n';
     }
 }
 

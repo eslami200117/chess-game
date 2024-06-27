@@ -18,6 +18,7 @@ public:
     void executeCommand(std::string);
     void printBoard()const;
     void loadGame(std::string);
+    void saveGame(std::string);
     bool isValid(Coordinate);
     bool isDone();
     void nextTurn();
@@ -25,6 +26,7 @@ public:
 
 private:
     std::shared_ptr<ChessPiece> charToPiece(char, Coordinate);
+    char pieceToChar(shared_ptr<ChessPiece>);
     std::vector<std::vector<std::shared_ptr<ChessPiece>>> m_board;
     bool m_turn;
 };
