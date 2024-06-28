@@ -1,14 +1,16 @@
 #pragma once
 
 #include<iostream>
+#include<memory>
 #include<vector>
 #include"Coordinate.hpp"
+#include"MoveStrategy.hpp"
 
 class ChessBoard;
 
 class ChessPiece {
 public:
-    ChessPiece(bool, Coordinate, std::vector<Coordinate>);
+    ChessPiece(bool, Coordinate, std::shared_ptr<MoveStrategy>, std::vector<Coordinate>);
     ~ChessPiece() = default;
     virtual std::vector<Coordinate>availableMoves(ChessBoard&) const;
     Coordinate getCoordinate();
@@ -19,6 +21,7 @@ protected:
     bool m_color;
     Coordinate m_coordinate;
     const std::vector<Coordinate> m_jump;
+    std::shared_ptr<MoveStrategy> m_strategy;
 
 };
 

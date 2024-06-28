@@ -4,9 +4,10 @@
 
 using namespace std;
 
-ChessPiece::ChessPiece(bool color, Coordinate coordinate, vector<Coordinate> jump = {})
+ChessPiece::ChessPiece(bool color, Coordinate coordinate, shared_ptr<MoveStrategy> moveStrategy, vector<Coordinate> jump = {})
     : m_color(color)
     , m_coordinate(coordinate)
+    , m_strategy(moveStrategy)
     , m_jump(jump)
 {}
 
@@ -50,33 +51,34 @@ vector<Coordinate> Bishop::availableMoves(ChessBoard& chessBoard) const {
 
 
 King::King(bool color, Coordinate coordinate)
-    :ChessPiece(color, coordinate, vector<Coordinate>{{0, 1}, {1, 1}, 
+    :ChessPiece(color, coordinate, shared_ptr<ShortMoveStrategy>(), vector<Coordinate>{{0, 1}, {1, 1}, 
         {1, 0}, {1, -1}, {0, -1}, {-1, -1}, {-1, 0}, {-1, 1}})
     ,m_isMoved(false)
 {}
 
 Queen::Queen(bool color, Coordinate coordinate)
-    :ChessPiece(color, coordinate, vector<Coordinate>{{0, 1}, {1, 1}, 
+    :ChessPiece(color, coordinate, shared_ptr<LongMoveStrategy>(), vector<Coordinate>{{0, 1}, {1, 1}, 
         {1, 0}, {1, -1}, {0, -1}, {-1, -1}, {-1, 0}, {-1, 1}})
 {}
 
 Rook::Rook(bool color, Coordinate coordinate)
-    :ChessPiece(color, coordinate, vector<Coordinate>{{0, 1}, {1, 0}, {0, -1}, {-1, 0}})
+    :ChessPiece(color, coordinate, shared_ptr<LongMoveStrategy>(), 
+        vector<Coordinate>{{0, 1}, {1, 0}, {0, -1}, {-1, 0}})
     ,m_isMoved(false)
 {}
 
 Bishop::Bishop(bool color, Coordinate coordinate)
-    :ChessPiece(color, coordinate, vector<Coordinate>{{1, 1}, {1, -1}, {-1, -1}, {-1, 1}})
+    :ChessPiece(color, coordinate, shared_ptr<LongMoveStrategy>(), 
+        vector<Coordinate>{{1, 1}, {1, -1}, {-1, -1}, {-1, 1}})
 {}
 
 Knight::Knight(bool color, Coordinate coordinate)
-    :ChessPiece(color, coordinate, {Coordinate{1, 2}, Coordinate{2, 1}, 
-        Coordinate{1, -2}, Coordinate{-2, 1}, Coordinate{-1, 2}, 
-            Coordinate{2, -1}, Coordinate{-1, -2}, Coordinate{-2, -1}})
+    :ChessPiece(color, coordinate, shared_ptr<ShortMoveStrategy>(), 
+        vector<Coordinate>{{1, 2}, {2, 1}, {1, -2}, {-2, 1}, {-1, 2}, {2, -1}, {-1, -2}, {-2, -1}})
 {}
 
 Pawn::Pawn(bool color, Coordinate coordinate)
-    : ChessPiece(color, coordinate, color ? 
+    : ChessPiece(color, coordinate, shared_ptr<ShortMoveStrategy>(), color ? 
         vector<Coordinate>{{0, 1}, {0, 2}, {1, 1}, {-1, 1}} :
         vector<Coordinate>{{0, -1}, {0, -2}, {1, -1}, {-1, -1}})
     , m_isMoved(false)
