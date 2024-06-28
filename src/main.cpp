@@ -11,7 +11,7 @@ int main(){
     chessBoard.loadGame();
     chessBoard.printBoard();
     while(!chessBoard.isDone()){
-        chessBoard.executeCommand();
+        if(chessBoard.executeCommand()) break;
         chessBoard.nextTurn();
         chessBoard.printBoard();
     }

@@ -139,7 +139,7 @@ bool ChessBoard::isDone(){
     return false;
 }
 
-void ChessBoard::executeCommand(){
+bool ChessBoard::executeCommand(){
     while(true) {
         cout<<"Player " << getTurn() << " move: ";
         string command, from, to, dummy;
@@ -147,7 +147,7 @@ void ChessBoard::executeCommand(){
 
         if(command == "q"){
             quite();
-            return;
+            return true;
         }
 
         istringstream iss(command);        
@@ -169,7 +169,7 @@ void ChessBoard::executeCommand(){
         }
         
         movePiece(src, des);
-        return;
+        return false;
 
     }
 

@@ -15,7 +15,7 @@ class ChessBoard {
 public:
     ChessBoard(const std::string);
     ~ChessBoard() = default;
-    void executeCommand();
+    bool executeCommand();
     void quite();
     void printBoard()const;
     void loadGame();
