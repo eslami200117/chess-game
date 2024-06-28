@@ -223,8 +223,14 @@ bool ChessBoard::isOpponent(Coordinate des) const{
 }
 
 bool ChessBoard::isSrcDesValid(Coordinate src, Coordinate des) {
-    if(!isOccupied(src)) return false;
-    if(m_board[src.x][src.y]->getColor() != m_turn) return false;
+    if(!isOccupied(src)){
+        cout<<"this box is empty!"<<endl;
+        return false;
+    }
+    if(m_board[src.x][src.y]->getColor() != m_turn){
+        cout<<"choise your own side!"<<endl;
+        return false;
+    }
     std::vector<Coordinate> allDes = m_board[src.x][src.y]->availableMoves(*this);
     for (const auto& move : allDes) {
         if (move == des) {
