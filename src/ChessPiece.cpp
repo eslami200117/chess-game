@@ -15,9 +15,9 @@ bool ChessPiece::getColor(){
     return m_color;
 }
 
-Coordinate ChessPiece::getCoordinate(){
-    return m_coordinate;
-}
+// Coordinate ChessPiece::getCoordinate(){
+//     return m_coordinate;
+// }
 
 void ChessPiece::setCoordinate(Coordinate des){
     m_coordinate = des;
@@ -32,7 +32,6 @@ vector<Coordinate> ChessPiece::availableMoves(ChessBoard& chessBoard) const {
 King::King(bool color, Coordinate coordinate)
     :ChessPiece(color, coordinate, make_shared<ShortMoveStrategy>(), vector<Coordinate>{{0, 1}, {1, 1}, 
         {1, 0}, {1, -1}, {0, -1}, {-1, -1}, {-1, 0}, {-1, 1}})
-    ,m_isMoved(false)
 {}
 
 Queen::Queen(bool color, Coordinate coordinate)
@@ -43,7 +42,6 @@ Queen::Queen(bool color, Coordinate coordinate)
 Rook::Rook(bool color, Coordinate coordinate)
     :ChessPiece(color, coordinate, make_shared<LongMoveStrategy>(), 
         vector<Coordinate>{{0, 1}, {1, 0}, {0, -1}, {-1, 0}})
-    ,m_isMoved(false)
 {}
 
 Bishop::Bishop(bool color, Coordinate coordinate)
@@ -60,7 +58,6 @@ Pawn::Pawn(bool color, Coordinate coordinate)
     : ChessPiece(color, coordinate, make_shared<PawnMoveStrategy>(), color ? 
         vector<Coordinate>{{1, 0}, {1, 1}, {1, -1}} :
         vector<Coordinate>{{-1, -0}, {-1, 1}, {-1, -1}})
-    , m_isMoved(false)
 {}
 
 char King::getChar() const {

@@ -4,10 +4,9 @@
 
 using namespace std;
 
-const string GAME_FILE_ADDRESS = "resource/defualt.txt";
 
 int main(){
-    ChessBoard chessBoard(GAME_FILE_ADDRESS);
+    ChessBoard chessBoard;
     chessBoard.loadGame();
     chessBoard.printBoard();
     while(!chessBoard.isDone()){

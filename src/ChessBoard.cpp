@@ -1,10 +1,10 @@
 #include"ChessBoard.hpp"
 using namespace std;
 
-ChessBoard::ChessBoard(const string address)
+ChessBoard::ChessBoard()
     : m_board(8, vector<shared_ptr<ChessPiece>>(8, nullptr))
     , m_turn(true)
-    , m_loadAddress(address)
+    , m_loadAddress("resource/default.txt")
     , m_winer(0)
 {}
 
