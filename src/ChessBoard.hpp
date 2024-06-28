@@ -9,6 +9,7 @@
 #include <filesystem>
 #include"ChessPiece.hpp"
 #include"Coordinate.hpp"
+#include"ChessPieceFactory.hpp"
 
 
 class ChessBoard {

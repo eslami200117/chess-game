@@ -17,21 +17,6 @@ string ChessBoard::getTurn() const{
     else return "Black";
 }
 
-
-
-shared_ptr<ChessPiece> ChessBoard::charToPiece(char pieceChar, Coordinate coordinate) {
-    bool color = isupper(pieceChar); // White pieces are uppercase
-    switch (tolower(pieceChar)) {
-        case 'k': return make_shared<King>(color, coordinate);
-        case 'q': return make_shared<Queen>(color, coordinate);
-        case 'r': return make_shared<Rook>(color, coordinate);
-        case 'b': return make_shared<Bishop>(color, coordinate);
-        case 'n': return make_shared<Knight>(color, coordinate);
-        case 'p': return make_shared<Pawn>(color, coordinate);
-        default: return nullptr;
-    }
-}
-
 void ChessBoard::listAvailableFiles() const {
     cout << "Available game files in the 'resource' folder:" << endl;
     for (const auto& entry : filesystem::directory_iterator("resource")) {
@@ -78,7 +63,7 @@ void ChessBoard::loadGame() {
     int row = 0;
     while (getline(file, line) && row < 8) {
         for (int col = 0; col < 8 && col < line.size(); ++col) {
-            m_board[row][col] = charToPiece(line[col], Coordinate(row, col));
+            m_board[row][col] = ChessPieceFactory::createPiece(line[col], Coordinate(row, col));
         }
         ++row;
     }
