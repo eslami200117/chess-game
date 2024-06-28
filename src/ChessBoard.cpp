@@ -234,4 +234,9 @@ bool ChessBoard::isSrcDesValid(Coordinate src, Coordinate des) {
 
     return false;
 }
-void ChessBoard::movePiece(Coordinate src, Coordinate des){}
+
+void ChessBoard::movePiece(Coordinate src, Coordinate des){
+    m_board[des.x][des.y] = std::move(m_board[src.x][src.y]);
+    m_board[src.x][src.y] = nullptr;
+    m_board[des.x][des.y]->setCoordinate(des);
+}

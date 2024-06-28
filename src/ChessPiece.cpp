@@ -19,6 +19,10 @@ Coordinate ChessPiece::getCoordinate(){
     return m_coordinate;
 }
 
+void ChessPiece::setCoordinate(Coordinate des){
+    m_coordinate = des;
+}
+
 vector<Coordinate> ChessPiece::availableMoves(ChessBoard& chessBoard) const {
     return m_strategy->availableMoves(chessBoard, m_coordinate, m_jump);
 }

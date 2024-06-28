@@ -15,6 +15,7 @@ public:
     std::vector<Coordinate>availableMoves(ChessBoard&) const;
     Coordinate getCoordinate();
     bool getColor();
+    void setCoordinate(Coordinate des);
     virtual char getChar() const = 0;
 
 protected:
