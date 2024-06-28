@@ -87,6 +87,7 @@ void ChessBoard::loadGame() {
 
 
 void ChessBoard::saveGame(string filename) {
+    cout<<"test"<<endl;
     ofstream file(filename);
     if (!file.is_open()) {
         cerr << "Error: Cannot open file " << filename << endl;
@@ -97,7 +98,10 @@ void ChessBoard::saveGame(string filename) {
 
     for (int row = 0; row < 8; ++row) {
         for (int col = 0; col < 8; ++col) {
-            file << m_board[row][col]->getChar();
+            if(m_board[row][col])
+                file << m_board[row][col]->getChar();
+            else
+                file<<'.';
         }
         file << endl;
     }

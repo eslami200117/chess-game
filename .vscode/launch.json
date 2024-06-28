@@ -8,8 +8,8 @@
       "args": [],
       "stopAtEntry": false,
       "externalConsole": false,
-      "cwd": "/home/eslami/Desktop/bootCamp/midterm/src",
-      "program": "/home/eslami/Desktop/bootCamp/midterm/src/build/Debug/outDebug",
+      "cwd": "/home/eslami/Desktop/bootCamp/midterm",
+      "program": "/home/eslami/Desktop/bootCamp/midterm/build/Debug/outDebug",
       "MIMode": "gdb",
       "miDebuggerPath": "gdb",
       "setupCommands": [
