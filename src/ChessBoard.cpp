@@ -155,13 +155,12 @@ bool ChessBoard::executeCommand(){
     while(true) {
         cout<<"Player " << getTurn() << " move: ";
         string command, from, to, dummy;
-        cin >> command;
+        getline(cin, command);
 
         if(command == "q"){
             quite();
             return true;
         }
-
         istringstream iss(command);        
         if (!(iss >> from >> dummy >> to) || dummy != "to") {
             cout << "Invalid command format. (e.g., 'a6 to b6') or 'q' to quit." << endl;
@@ -191,11 +190,12 @@ bool ChessBoard::executeCommand(){
 Coordinate ChessBoard::convertPosition(const string& pos) const {
     char file = pos[0];
     char rank = pos[1];
-    if (file >= 'a' && file <= 'h' && rank >= '1' && rank <= '8')
-        return Coordinate{-1, -1};
     int x = 8 - (rank - '1') - 1;
     int y = file - 'a';
-    return Coordinate{x, y};
+    if (0 <= x <= 8 && 0 <= y <= 8 ){
+        return Coordinate{x, y};
+    }
+    return Coordinate{-1, -1};
 }
 
 bool ChessBoard::isValid(Coordinate coordinate){
@@ -235,7 +235,6 @@ bool ChessBoard::isOpponent(Coordinate des) const{
 
 bool ChessBoard::isSrcDesValid(Coordinate src, Coordinate des) {
     if (!m_board[src.x][src.y]) return false;
-
     std::vector<Coordinate> allDes = m_board[src.x][src.y]->availableMoves(*this);
 
     for (const auto& move : allDes) {
@@ -248,8 +247,10 @@ bool ChessBoard::isSrcDesValid(Coordinate src, Coordinate des) {
 }
 
 void ChessBoard::movePiece(Coordinate src, Coordinate des){
+    char isKing;
+    if(m_board[des.x][des.y])
+        isKing  = m_board[des.x][des.y]->getChar();
     m_board[des.x][des.y] = std::move(m_board[src.x][src.y]);
-    char isKing  = m_board[src.x][src.y]->getChar();
     m_board[src.x][src.y] = nullptr;
     m_board[des.x][des.y]->setCoordinate(des);
     if(isKing == 'k'){

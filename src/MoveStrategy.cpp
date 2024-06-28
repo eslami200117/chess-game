@@ -40,8 +40,8 @@ vector<Coordinate> PawnMoveStrategy::availableMoves(ChessBoard& chessBoard, Coor
 
     for (const auto& j : jump) {
         Coordinate target = j + coordinate;
-
-        if (j.y != 0 && j.x == 0) {
+        
+        if (j.y == 0 && j.x != 0) {
             if (chessBoard.isValid(target) && !chessBoard.isOpponent(target)) {
                 allPossibleMoves.push_back(target);
             }
@@ -55,10 +55,10 @@ vector<Coordinate> PawnMoveStrategy::availableMoves(ChessBoard& chessBoard, Coor
 
     }
 
-    if ((coordinate.y == 1 && chessBoard.getTurn() == "White") ||
-        (coordinate.y == 6 && chessBoard.getTurn() == "Black")) {
-        Coordinate doubleMove = coordinate + Coordinate(0, coordinate.y == 1 ? 2 : -2);
-        Coordinate singleMove = coordinate + Coordinate(0, coordinate.y == 1 ? 1 : -1);
+    if ((coordinate.x == 1 && chessBoard.getTurn() == "White") ||
+        (coordinate.x == 6 && chessBoard.getTurn() == "Black")) {
+        Coordinate doubleMove = coordinate + Coordinate(0, coordinate.x == 1 ? 2 : -2);
+        Coordinate singleMove = coordinate + Coordinate(0, coordinate.x == 1 ? 1 : -1);
         if (chessBoard.isValid(doubleMove) && !chessBoard.isOccupied(doubleMove) && !chessBoard.isOccupied(singleMove)) {
             allPossibleMoves.push_back(doubleMove);
         }

@@ -30,36 +30,36 @@ vector<Coordinate> ChessPiece::availableMoves(ChessBoard& chessBoard) const {
 
 
 King::King(bool color, Coordinate coordinate)
-    :ChessPiece(color, coordinate, shared_ptr<ShortMoveStrategy>(), vector<Coordinate>{{0, 1}, {1, 1}, 
+    :ChessPiece(color, coordinate, make_shared<ShortMoveStrategy>(), vector<Coordinate>{{0, 1}, {1, 1}, 
         {1, 0}, {1, -1}, {0, -1}, {-1, -1}, {-1, 0}, {-1, 1}})
     ,m_isMoved(false)
 {}
 
 Queen::Queen(bool color, Coordinate coordinate)
-    :ChessPiece(color, coordinate, shared_ptr<LongMoveStrategy>(), vector<Coordinate>{{0, 1}, {1, 1}, 
+    :ChessPiece(color, coordinate, make_shared<LongMoveStrategy>(), vector<Coordinate>{{0, 1}, {1, 1}, 
         {1, 0}, {1, -1}, {0, -1}, {-1, -1}, {-1, 0}, {-1, 1}})
 {}
 
 Rook::Rook(bool color, Coordinate coordinate)
-    :ChessPiece(color, coordinate, shared_ptr<LongMoveStrategy>(), 
+    :ChessPiece(color, coordinate, make_shared<LongMoveStrategy>(), 
         vector<Coordinate>{{0, 1}, {1, 0}, {0, -1}, {-1, 0}})
     ,m_isMoved(false)
 {}
 
 Bishop::Bishop(bool color, Coordinate coordinate)
-    :ChessPiece(color, coordinate, shared_ptr<LongMoveStrategy>(), 
+    :ChessPiece(color, coordinate, make_shared<LongMoveStrategy>(), 
         vector<Coordinate>{{1, 1}, {1, -1}, {-1, -1}, {-1, 1}})
 {}
 
 Knight::Knight(bool color, Coordinate coordinate)
-    :ChessPiece(color, coordinate, shared_ptr<ShortMoveStrategy>(), 
+    :ChessPiece(color, coordinate, make_shared<ShortMoveStrategy>(), 
         vector<Coordinate>{{1, 2}, {2, 1}, {1, -2}, {-2, 1}, {-1, 2}, {2, -1}, {-1, -2}, {-2, -1}})
 {}
 
 Pawn::Pawn(bool color, Coordinate coordinate)
-    : ChessPiece(color, coordinate, shared_ptr<ShortMoveStrategy>(), color ? 
-        vector<Coordinate>{{0, 1}, {0, 2}, {1, 1}, {-1, 1}} :
-        vector<Coordinate>{{0, -1}, {0, -2}, {1, -1}, {-1, -1}})
+    : ChessPiece(color, coordinate, make_shared<PawnMoveStrategy>(), color ? 
+        vector<Coordinate>{{1, 0}, {2, 0}, {1, 1}, {1, -1}} :
+        vector<Coordinate>{{-1, -0}, {-2, 0}, {-1, 1}, {-1, -1}})
     , m_isMoved(false)
 {}
 

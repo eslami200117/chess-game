@@ -7,6 +7,7 @@ class ChessBoard;
 
 class MoveStrategy {
 public:
+    MoveStrategy() = default;
     virtual ~MoveStrategy() = default;
     virtual std::vector<Coordinate> availableMoves(
         ChessBoard& chessBoard, 
