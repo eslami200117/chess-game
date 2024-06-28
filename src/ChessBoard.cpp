@@ -7,11 +7,11 @@ ChessBoard::ChessBoard()
     {}
 
 void ChessBoard::nextTurn(){
-    m_turn = ~m_turn;
+    m_turn = !m_turn;
 }
 
 string ChessBoard::getTurn(){
-    if(m_turn) return "While";
+    if(m_turn) return "White";
     else return "Black";
 }
 

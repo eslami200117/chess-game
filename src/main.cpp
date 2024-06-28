@@ -4,7 +4,7 @@
 
 using namespace std;
 
-const string GAME_FILE_ADDRESS = "/resource/board.txt";
+const string GAME_FILE_ADDRESS = "resource/board.txt";
 
 int main(){
     string command;
@@ -12,7 +12,7 @@ int main(){
     chessBoard.loadGame(GAME_FILE_ADDRESS);
     chessBoard.printBoard();
     while(!chessBoard.isDone()){
-        cout<<"Player: " << chessBoard.getTurn() << " move: ";
+        cout<<"Player " << chessBoard.getTurn() << " move: ";
         cin>>command;
         chessBoard.executeCommand(command);
         chessBoard.nextTurn();
