@@ -29,9 +29,6 @@ vector<Coordinate> LongMoveStrategy::availableMoves(ChessBoard& chessBoard, Coor
                 }
             } else break;
         }
-        Coordinate target = *j + coordinate;
-        if (chessBoard.isValid(target))
-        allPossibleMoves.push_back(target);
     }
 
     return allPossibleMoves;
