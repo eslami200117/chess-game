@@ -1,6 +1,6 @@
 #include "ChessPieceFactory.hpp"
 
-std::shared_ptr<ChessPiece> ChessPieceFactory::createPiece(char pieceChar, Coordinate coordinate) {
+std::shared_ptr<ChessPiece> ChessPieceFactory::createPiece(const char pieceChar, Coordinate coordinate) {
     bool color = isupper(pieceChar); 
     switch (tolower(pieceChar)) {
         case 'k': return std::make_shared<King>(color, coordinate);
