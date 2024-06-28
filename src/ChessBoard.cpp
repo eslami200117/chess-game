@@ -5,7 +5,8 @@ ChessBoard::ChessBoard(const string address)
     : m_board(8, vector<shared_ptr<ChessPiece>>(8, nullptr))
     , m_turn(true)
     , m_loadAddress(address)
-    {}
+    , m_winer(0)
+{}
 
 void ChessBoard::nextTurn(){
     m_turn = !m_turn;
@@ -136,7 +137,14 @@ void ChessBoard::printBoard() const {
 
 
 bool ChessBoard::isDone(){
-    return false;
+    if(m_winer == 0)
+        return false;
+    if(m_winer == 2){
+        cout<< "White is winner!"<<endl;
+    } else if(m_winer == 1){
+        cout<< "Black is winner!"<<endl;
+    }
+    return true;
 }
 
 bool ChessBoard:: isOccupied(Coordinate coordinate) const {
@@ -241,6 +249,10 @@ bool ChessBoard::isSrcDesValid(Coordinate src, Coordinate des) {
 
 void ChessBoard::movePiece(Coordinate src, Coordinate des){
     m_board[des.x][des.y] = std::move(m_board[src.x][src.y]);
+    char isKing  = m_board[src.x][src.y]->getChar();
     m_board[src.x][src.y] = nullptr;
     m_board[des.x][des.y]->setCoordinate(des);
+    if(isKing == 'k'){
+        m_winer = int(m_turn) + 1;
+    }
 }

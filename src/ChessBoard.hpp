@@ -35,5 +35,6 @@ private:
     Coordinate convertPosition(const std::string&) const;
     void listAvailableFiles() const;
     bool m_turn;
+    int m_winer;
     const std::string m_loadAddress;
 };
