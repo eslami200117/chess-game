@@ -3,12 +3,12 @@
 #include<iostream>
 #include<vector>
 #include"Coordinate.hpp"
-#include"ChessBoard.hpp"
 
+class ChessBoard;
 
 class ChessPiece {
 public:
-    ChessPiece() = delete;
+    ChessPiece(bool, Coordinate);
     ~ChessPiece() = default;
     virtual std::vector<Coordinate>availableMoves(ChessBoard&) const;
     Coordinate getCoordinate();
@@ -27,6 +27,8 @@ protected:
 
 class King : public ChessPiece{
 public:
+    King(bool, Coordinate);
+    ~King() = default;
     char getChar();
 private:
     bool m_isMoved;
@@ -34,12 +36,16 @@ private:
 
 class Queen : public ChessPiece{
 public:
+    Queen(bool, Coordinate);
+    ~Queen() = default;
     std::vector<Coordinate> availableMoves(ChessBoard&) const override;
     char getChar();
 };
 
 class Rook : public ChessPiece{
 public:
+    Rook(bool, Coordinate);
+    ~Rook() = default;
     std::vector<Coordinate> availableMoves(ChessBoard&) const override;
     char getChar();
 private:
@@ -48,17 +54,23 @@ private:
 
 class Bishop : public ChessPiece{
 public:
+    Bishop(bool, Coordinate);
+    ~Bishop() = default;
     std::vector<Coordinate> availableMoves(ChessBoard&) const override;
     char getChar();
 };
 
 class Knight : public ChessPiece{
 public:
+    Knight(bool, Coordinate);
+    ~Knight() = default;
     char getChar();
 };
 
 class Pawn : public ChessPiece{
 public:
+    Pawn(bool, Coordinate);
+    ~Pawn() = default;
     char getChar();
 private:
     bool m_isMoved;

@@ -1,7 +1,13 @@
-#include"ChessBoard.hpp"
+#include"ChessPiece.hpp"
+
 
 using namespace std;
 
+ChessPiece::ChessPiece(bool color, Coordinate coordinate)
+    : m_color(color),
+    m_coordinate(coordinate){
+
+}
 
 bool ChessPiece::getColor(){
     return m_color;
@@ -38,6 +44,39 @@ vector<Coordinate> Bishop::availableMoves(ChessBoard& chessBoard) const {
 }
 
 
+King::King(bool color, Coordinate coordinate)
+    :ChessPiece(color, coordinate),
+    m_isMoved(false){
+
+}
+
+Queen::Queen(bool color, Coordinate coordinate)
+    :ChessPiece(color, coordinate){
+
+}
+
+Rook::Rook(bool color, Coordinate coordinate)
+    :ChessPiece(color, coordinate),
+    m_isMoved(false){
+
+}
+
+Bishop::Bishop(bool color, Coordinate coordinate)
+    :ChessPiece(color, coordinate){
+
+}
+
+Knight::Knight(bool color, Coordinate coordinate)
+    :ChessPiece(color, coordinate){
+
+}
+
+Pawn::Pawn(bool color, Coordinate coordinate)
+    :ChessPiece(color, coordinate),
+    m_isMoved(false){
+
+}
+
 char King::getChar(){
     return 'k';
 }
@@ -55,7 +94,7 @@ char Bishop::getChar(){
 }
 
 char Knight::getChar(){
-    return 'kn';
+    return 'n';
 }
 
 char Pawn::getChar(){
