@@ -14,7 +14,7 @@ public:
     Coordinate getCoordinate();
     // void move(Coordinate);
     bool getColor();
-    virtual char getChar();
+    virtual char getChar() = 0;
 
 protected:
     bool m_color;
