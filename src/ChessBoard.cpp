@@ -77,22 +77,29 @@ void ChessBoard::saveGame(string filename) {
     file.close();
 }
 
+
 void ChessBoard::printBoard() const {
-    for (const auto& row : m_board) {
-        for (const auto& piece : row) {
-            if (piece) {
-                char pieceChar = '.';
-                if(piece != nullptr){
-                    pieceChar = piece->getChar();
-                    pieceChar = piece->getColor()? toupper(pieceChar):tolower(pieceChar);
-                }
-                cout << pieceChar;
-            } else {
-                cout << '.';
+    const int boardSize = m_board.size();
+    const string columnLabels = "   a b c d e f g h";
+
+    cout << columnLabels << endl;
+    cout << " +-----------------+" << endl;
+
+    for (int row = 0; row < boardSize; ++row) {
+        cout << boardSize - row << "| ";
+        for (int col = 0; col < boardSize; ++col) {
+            char pieceChar = '.';
+            if (m_board[row][col]) {
+                pieceChar = m_board[row][col]->getChar();
+                pieceChar = m_board[row][col]->getColor() ? toupper(pieceChar) : tolower(pieceChar);
             }
+            cout << pieceChar << ' ';
         }
-        cout << '\n';
+        cout << "| " << boardSize - row << endl;
     }
+
+    cout << " +-----------------+" << endl;
+    cout << columnLabels << endl;
 }
 
 
