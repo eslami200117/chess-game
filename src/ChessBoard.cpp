@@ -215,5 +215,11 @@ void ChessBoard::quite(){
         saveGame("resource/" + name + ".txt");
     }
 }
+bool ChessBoard::isOpponent(Coordinate des){
+    if(!m_board[des.x][des.y]) return false;
+    if(m_board[des.x][des.y]->getChar() == m_turn) return false;
+    return true;
+}
+
 bool ChessBoard::isSrcDesValid(Coordinate src, Coordinate des){return true;}
 void ChessBoard::movePiece(Coordinate src, Coordinate des){}

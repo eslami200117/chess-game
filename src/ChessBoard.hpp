@@ -21,6 +21,7 @@ public:
     void loadGame();
     void saveGame(std::string);
     bool isValid(Coordinate);
+    bool isOpponent(Coordinate);
     bool isDone();
     void nextTurn();
     std::string getTurn();
