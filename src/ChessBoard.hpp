@@ -1,21 +1,21 @@
 #pragma once
 
 #include<string>
+#include <sstream>
 #include<vector>
 #include <iostream>
 #include <fstream>
-#include <unordered_map>
 #include<memory>
 #include"ChessPiece.hpp"
 #include"Coordinate.hpp"
 
-enum class Pieces { _King, _Queen,  _Rook, _Bishpo, _Knight, _Pawn, _Empty}; 
 
 class ChessBoard {
 public:
     ChessBoard();
     ~ChessBoard() = default;
-    void executeCommand(std::string);
+    void executeCommand();
+    void quite();
     void printBoard()const;
     void loadGame(std::string);
     void saveGame(std::string);
@@ -26,6 +26,9 @@ public:
 
 private:
     std::shared_ptr<ChessPiece> charToPiece(char, Coordinate);
+    bool isSrcDesValid(Coordinate, Coordinate);
+    void movePiece(Coordinate, Coordinate);
     std::vector<std::vector<std::shared_ptr<ChessPiece>>> m_board;
+    Coordinate convertPosition(const std::string&) const;
     bool m_turn;
 };

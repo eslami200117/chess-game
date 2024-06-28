@@ -107,8 +107,50 @@ bool ChessBoard::isDone(){
     return false;
 }
 
-void ChessBoard::executeCommand(string command){
+void ChessBoard::executeCommand(){
+    while(true) {
+        cout<<"Player " << getTurn() << " move: ";
+        string command, from, to, dummy;
+        cin >> command;
 
+        if(command == "q"){
+            quite();
+            return;
+        }
+
+        istringstream iss(command);        
+        if (!(iss >> from >> dummy >> to) || dummy != "to") {
+            cout << "Invalid command format. (e.g., 'a6 to b6') or 'q' to quit." << endl;
+            continue;
+        };
+
+        Coordinate src = convertPosition(from);
+        Coordinate des = convertPosition(to);
+
+        if (src == Coordinate{-1, -1} || des == Coordinate{-1, -1}) {
+            cout << "Invalid position in command. Use positions between 'a1' and 'h8'." << endl;
+            continue;
+        }
+        if(!isSrcDesValid(src, des)){
+            cout << "Invalid move." << endl;
+            continue;
+        }
+        
+        movePiece(src, des);
+
+    }
+
+}
+
+
+Coordinate ChessBoard::convertPosition(const string& pos) const {
+    char file = pos[0];
+    char rank = pos[1];
+    if (file >= 'a' && file <= 'h' && rank >= '1' && rank <= '8')
+        return Coordinate{-1, -1};
+    int x = 8 - (rank - '1') - 1;
+    int y = file - 'a';
+    return Coordinate{x, y};
 }
 
 bool ChessBoard::isValid(Coordinate coordinate){
@@ -128,3 +170,7 @@ bool ChessBoard::isValid(Coordinate coordinate){
 
     return rangeValidate && emptyValidate;
 }
+
+void ChessBoard::quite(){}
+bool ChessBoard::isSrcDesValid(Coordinate src, Coordinate des){return true;}
+void ChessBoard::movePiece(Coordinate src, Coordinate des){}
