@@ -33,6 +33,7 @@ private:
     void movePiece(Coordinate, Coordinate);
     std::vector<std::vector<std::shared_ptr<ChessPiece>>> m_board;
     Coordinate convertPosition(const std::string&) const;
+    std::string reverseCoordinate(Coordinate);
     void listAvailableFiles() const;
     bool m_turn;
     int m_winer;

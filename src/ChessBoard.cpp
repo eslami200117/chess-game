@@ -174,7 +174,6 @@ bool ChessBoard::executeCommand(){
             continue;
         }
         if(!isSrcDesValid(src, des)){
-            cout << "Invalid move." << endl;
             continue;
         }
         
@@ -195,6 +194,12 @@ Coordinate ChessBoard::convertPosition(const string& pos) const {
         return Coordinate{x, y};
     }
     return Coordinate{-1, -1};
+}
+
+string ChessBoard::reverseCoordinate(Coordinate coordinate) {
+    char rank = '8' - coordinate.x;
+    char file = 'a' + coordinate.y;
+    return std::string{file, rank};
 }
 
 bool ChessBoard::isValid(Coordinate coordinate){
@@ -233,7 +238,6 @@ bool ChessBoard::isOpponent(Coordinate des) const{
 }
 
 bool ChessBoard::isSrcDesValid(Coordinate src, Coordinate des) {
-    cout<<"is src des valid"<<endl;
     if(!isOccupied(src)) return false;
     if(m_board[src.x][src.y]->getColor() != m_turn) return false;
     std::vector<Coordinate> allDes = m_board[src.x][src.y]->availableMoves(*this);
@@ -243,6 +247,12 @@ bool ChessBoard::isSrcDesValid(Coordinate src, Coordinate des) {
         }
     }
 
+    cout << "Invalid move." << endl;
+    cout<<"All possible move for "<<reverseCoordinate(src)<<": {";
+    for (const auto& move : allDes) {
+        cout<<reverseCoordinate(move)<<", ";
+    }
+    cout<<"}"<<endl;
     return false;
 }
 
