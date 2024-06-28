@@ -34,15 +34,24 @@ shared_ptr<ChessPiece> ChessBoard::charToPiece(char pieceChar, Coordinate coordi
 void ChessBoard::listAvailableFiles() const {
     cout << "Available game files in the 'resource' folder:" << endl;
     for (const auto& entry : filesystem::directory_iterator("resource")) {
-        cout << "  " << entry.path().filename().string() << endl;
+        if (entry.is_regular_file()) {
+            string filename = entry.path().filename().string();
+            size_t lastdot = filename.find_last_of(".");
+            if (lastdot != string::npos) {
+                filename = filename.substr(0, lastdot);
+            }
+            cout << "  " << filename << endl;
+        }
     }
 }
+
+
 
 void ChessBoard::loadGame() {
     listAvailableFiles();
     string filename;
     cout << "Do you want to load a game? If yes, enter the filename, otherwise press Enter to load the default game: ";
-    cin>>filename;
+    getline(cin, filename);
 
     if (filename.empty()) {
         filename = m_loadAddress;
@@ -52,15 +61,16 @@ void ChessBoard::loadGame() {
 
     ifstream file(filename);
     if (!file.is_open()) {
-        cerr << "Error: Cannot open file " << filename << endl;
-        return;
+        cout << "Error: Cannot open file " << filename << endl;
+        cout << "Default game load."<<endl;
+        file = ifstream(m_loadAddress);
     }
     string line;
 
     if (getline(file, line)) {
         m_turn = (line == "white"); 
     } else {
-        cerr << "Error: Failed to read the boolean value from the file" << endl;
+        cout << "Error: Failed to read the boolean value from the file" << endl;
         return;
     }
 

@@ -14,6 +14,10 @@ bool ChessPiece::getColor(){
     return m_color;
 }
 
+Coordinate ChessPiece::getCoordinate(){
+    return m_coordinate;
+}
+
 vector<Coordinate> ChessPiece::availableMoves(ChessBoard& chessBoard) const {
     vector<Coordinate> allPossibleMoves;
     for(auto jump = m_jump.cbegin(); jump != m_jump.cend(); jump++){
