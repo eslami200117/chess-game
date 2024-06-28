@@ -11,11 +11,11 @@ ChessPiece::ChessPiece(bool color, Coordinate coordinate, shared_ptr<MoveStrateg
     , m_jump(jump)
 {}
 
-bool ChessPiece::getColor(){
+bool ChessPiece::getColor() const{
     return m_color;
 }
 
-Coordinate ChessPiece::getCoordinate(){
+Coordinate ChessPiece::getCoordinate() const{
     return m_coordinate;
 }
 
@@ -84,27 +84,27 @@ Pawn::Pawn(bool color, Coordinate coordinate)
     , m_isMoved(false)
 {}
 
-char King::getChar(){
+char King::getChar() const {
     return 'k';
 }
 
-char Queen::getChar(){
+char Queen::getChar() const {
     return 'q';
 }
 
-char Rook::getChar(){
+char Rook::getChar() const {
     return 'r';
 }
 
-char Bishop::getChar(){
+char Bishop::getChar() const {
     return 'b';
 }
 
-char Knight::getChar(){
+char Knight::getChar() const {
     return 'n';
 }
 
-char Pawn::getChar(){
+char Pawn::getChar() const {
     return 'p';
 }
 
