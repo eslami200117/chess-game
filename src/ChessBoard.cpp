@@ -139,6 +139,10 @@ bool ChessBoard::isDone(){
     return false;
 }
 
+bool ChessBoard:: isOccupied(Coordinate coordinate) const {
+    return m_board[coordinate.x][coordinate.y] != nullptr;
+}
+
 bool ChessBoard::executeCommand(){
     while(true) {
         cout<<"Player " << getTurn() << " move: ";
