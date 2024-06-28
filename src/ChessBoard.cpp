@@ -11,7 +11,7 @@ void ChessBoard::nextTurn(){
     m_turn = !m_turn;
 }
 
-string ChessBoard::getTurn(){
+string ChessBoard::getTurn() const{
     if(m_turn) return "White";
     else return "Black";
 }
@@ -86,7 +86,7 @@ void ChessBoard::loadGame() {
 }
 
 
-void ChessBoard::saveGame(string filename) {
+void ChessBoard::saveGame(const string& filename) const{
     cout<<"test"<<endl;
     ofstream file(filename);
     if (!file.is_open()) {
@@ -204,7 +204,7 @@ bool ChessBoard::isValid(Coordinate coordinate){
     return rangeValidate && emptyValidate;
 }
 
-void ChessBoard::quite(){
+void ChessBoard::quite()const{
     cout<<"Are you want to save game? [y/n]"<<endl;
     char y_n;
     cin>>y_n;
@@ -215,7 +215,7 @@ void ChessBoard::quite(){
         saveGame("resource/" + name + ".txt");
     }
 }
-bool ChessBoard::isOpponent(Coordinate des){
+bool ChessBoard::isOpponent(Coordinate des) const{
     if(!m_board[des.x][des.y]) return false;
     if(m_board[des.x][des.y]->getChar() == m_turn) return false;
     return true;

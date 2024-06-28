@@ -16,15 +16,15 @@ public:
     ChessBoard(const std::string);
     ~ChessBoard() = default;
     bool executeCommand();
-    void quite();
+    void quite()const;
     void printBoard()const;
     void loadGame();
-    void saveGame(std::string);
+    void saveGame(const std::string&) const;
     bool isValid(Coordinate);
-    bool isOpponent(Coordinate);
+    bool isOpponent(Coordinate) const;
     bool isDone();
     void nextTurn();
-    std::string getTurn();
+    std::string getTurn() const;
 
 private:
     std::shared_ptr<ChessPiece> charToPiece(char, Coordinate);
