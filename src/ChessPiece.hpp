@@ -8,11 +8,11 @@
 
 class ChessPiece {
 public:
-    ChessPiece();
-    ~ChessPiece();
+    ChessPiece() = delete;
+    ~ChessPiece() = default;
     virtual std::vector<Coordinate>availableMoves(ChessBoard&) const;
     Coordinate getCoordinate();
-    void move(Coordinate);
+    // void move(Coordinate);
     bool getColor();
     virtual char getChar();
 

@@ -26,7 +26,6 @@ public:
 
 private:
     std::shared_ptr<ChessPiece> charToPiece(char, Coordinate);
-    char pieceToChar(shared_ptr<ChessPiece>);
     std::vector<std::vector<std::shared_ptr<ChessPiece>>> m_board;
     bool m_turn;
 };
