@@ -12,9 +12,9 @@ class ChessPiece {
 public:
     ChessPiece(bool, Coordinate, std::shared_ptr<MoveStrategy>, std::vector<Coordinate>);
     ~ChessPiece() = default;
-    virtual std::vector<Coordinate>availableMoves(ChessBoard&) const;
-    Coordinate getCoordinate() const;
-    bool getColor() const;
+    std::vector<Coordinate>availableMoves(ChessBoard&) const;
+    Coordinate getCoordinate();
+    bool getColor();
     virtual char getChar() const = 0;
 
 protected:
@@ -39,7 +39,6 @@ class Queen : public ChessPiece{
 public:
     Queen(bool, Coordinate);
     ~Queen() = default;
-    std::vector<Coordinate> availableMoves(ChessBoard&) const override;
     char getChar() const override;
 };
 
@@ -47,7 +46,6 @@ class Rook : public ChessPiece{
 public:
     Rook(bool, Coordinate);
     ~Rook() = default;
-    std::vector<Coordinate> availableMoves(ChessBoard&) const override;
     char getChar() const override;
 private:
     bool m_isMoved;
@@ -57,7 +55,6 @@ class Bishop : public ChessPiece{
 public:
     Bishop(bool, Coordinate);
     ~Bishop() = default;
-    std::vector<Coordinate> availableMoves(ChessBoard&) const override;
     char getChar() const override;
 };
 
