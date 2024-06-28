@@ -12,7 +12,6 @@ public:
     ~ChessPiece() = default;
     virtual std::vector<Coordinate>availableMoves(ChessBoard&) const;
     Coordinate getCoordinate();
-    // void move(Coordinate);
     bool getColor();
     virtual char getChar() = 0;
 
