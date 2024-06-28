@@ -8,18 +8,39 @@ class ChessBoard;
 class MoveStrategy {
 public:
     virtual ~MoveStrategy() = default;
-    virtual std::vector<Coordinate> availableMoves(ChessBoard& chessBoard, Coordinate coordinate, const std::vector<Coordinate>& jump) = 0;
+    virtual std::vector<Coordinate> availableMoves(
+        ChessBoard& chessBoard, 
+        Coordinate coordinate, 
+        const std::vector<Coordinate>& jump
+    ) = 0;
 };
 
 
 class ShortMoveStrategy : public MoveStrategy {
-    public:
-    std::vector<Coordinate> availableMoves(ChessBoard& chessBoard, Coordinate coordinate, const std::vector<Coordinate>& jump) override;
+public:
+    std::vector<Coordinate> availableMoves(
+        ChessBoard& chessBoard, 
+        Coordinate coordinate, 
+        const std::vector<Coordinate>& jump
+    ) override;
 };
 
 
 class LongMoveStrategy : public MoveStrategy {
 public:
-    std::vector<Coordinate> availableMoves(ChessBoard& chessBoard, Coordinate coordinate, const std::vector<Coordinate>& jump) override;
+    std::vector<Coordinate> availableMoves(
+        ChessBoard& chessBoard, 
+        Coordinate coordinate, 
+        const std::vector<Coordinate>& jump
+    ) override;
 };
 
+
+class PawnMoveStrategy : public MoveStrategy {
+public:
+    std::vector<Coordinate> availableMoves(
+        ChessBoard& chessBoard, 
+        Coordinate coordinate, 
+        const std::vector<Coordinate>& jump
+    ) override;
+};
