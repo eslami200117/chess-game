@@ -58,8 +58,8 @@ Knight::Knight(bool color, Coordinate coordinate)
 
 Pawn::Pawn(bool color, Coordinate coordinate)
     : ChessPiece(color, coordinate, make_shared<PawnMoveStrategy>(), color ? 
-        vector<Coordinate>{{1, 0}, {2, 0}, {1, 1}, {1, -1}} :
-        vector<Coordinate>{{-1, -0}, {-2, 0}, {-1, 1}, {-1, -1}})
+        vector<Coordinate>{{1, 0}, {1, 1}, {1, -1}} :
+        vector<Coordinate>{{-1, -0}, {-1, 1}, {-1, -1}})
     , m_isMoved(false)
 {}
 

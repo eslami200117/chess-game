@@ -88,7 +88,6 @@ void ChessBoard::loadGame() {
 
 
 void ChessBoard::saveGame(const string& filename) const{
-    cout<<"test"<<endl;
     ofstream file(filename);
     if (!file.is_open()) {
         cerr << "Error: Cannot open file " << filename << endl;
@@ -201,14 +200,14 @@ Coordinate ChessBoard::convertPosition(const string& pos) const {
 bool ChessBoard::isValid(Coordinate coordinate){
     bool rangeValidate = false;
     bool emptyValidate = false;
-    if(0 <= coordinate.x < 8 && 0 <= coordinate.y < 8){
+    if(-1 < coordinate.x  && coordinate.x < 8 && -1 < coordinate.y && coordinate.x < 8){
         rangeValidate = true;
-    }
+    } else return false;
 
     if(m_board[coordinate.x][coordinate.y] == nullptr){
         emptyValidate = true;
     } else {
-        if(m_board[coordinate.x][coordinate.y]->getColor() == m_turn){
+        if(m_board[coordinate.x][coordinate.y]->getColor() != m_turn){
             emptyValidate = true;
         }
     }
@@ -234,9 +233,10 @@ bool ChessBoard::isOpponent(Coordinate des) const{
 }
 
 bool ChessBoard::isSrcDesValid(Coordinate src, Coordinate des) {
-    if (!m_board[src.x][src.y]) return false;
+    cout<<"is src des valid"<<endl;
+    if(!isOccupied(src)) return false;
+    if(m_board[src.x][src.y]->getColor() != m_turn) return false;
     std::vector<Coordinate> allDes = m_board[src.x][src.y]->availableMoves(*this);
-
     for (const auto& move : allDes) {
         if (move == des) {
             return true;
@@ -248,10 +248,9 @@ bool ChessBoard::isSrcDesValid(Coordinate src, Coordinate des) {
 
 void ChessBoard::movePiece(Coordinate src, Coordinate des){
     char isKing;
-    if(m_board[des.x][des.y])
+    if(isOccupied(des))
         isKing  = m_board[des.x][des.y]->getChar();
     m_board[des.x][des.y] = std::move(m_board[src.x][src.y]);
-    m_board[src.x][src.y] = nullptr;
     m_board[des.x][des.y]->setCoordinate(des);
     if(isKing == 'k'){
         m_winer = int(m_turn) + 1;
