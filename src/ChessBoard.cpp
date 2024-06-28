@@ -1,9 +1,10 @@
 #include"ChessBoard.hpp"
 using namespace std;
 
-ChessBoard::ChessBoard()
+ChessBoard::ChessBoard(const string address)
     : m_board(8, vector<shared_ptr<ChessPiece>>(8, nullptr))
-    , m_turn(true) 
+    , m_turn(true)
+    , m_loadAddress(address)
     {}
 
 void ChessBoard::nextTurn(){
@@ -30,8 +31,25 @@ shared_ptr<ChessPiece> ChessBoard::charToPiece(char pieceChar, Coordinate coordi
     }
 }
 
+void ChessBoard::listAvailableFiles() const {
+    cout << "Available game files in the 'resource' folder:" << endl;
+    for (const auto& entry : filesystem::directory_iterator("resource")) {
+        cout << "  " << entry.path().filename().string() << endl;
+    }
+}
 
-void ChessBoard::loadGame(string filename) {
+void ChessBoard::loadGame() {
+    listAvailableFiles();
+    string filename;
+    cout << "Do you want to load a game? If yes, enter the filename, otherwise press Enter to load the default game: ";
+    cin>>filename;
+
+    if (filename.empty()) {
+        filename = m_loadAddress;
+    } else {
+        filename = "resource/" + filename + ".txt";
+    }
+
     ifstream file(filename);
     if (!file.is_open()) {
         cerr << "Error: Cannot open file " << filename << endl;
@@ -137,6 +155,7 @@ void ChessBoard::executeCommand(){
         }
         
         movePiece(src, des);
+        return;
 
     }
 
@@ -171,6 +190,16 @@ bool ChessBoard::isValid(Coordinate coordinate){
     return rangeValidate && emptyValidate;
 }
 
-void ChessBoard::quite(){}
+void ChessBoard::quite(){
+    cout<<"Are you want to save game? [y/n]"<<endl;
+    char y_n;
+    cin>>y_n;
+    if(y_n == 'y'){
+        cout<<"Enter a name for game: ";
+        string name;
+        cin>>name;
+        saveGame("resource/" + name + ".txt");
+    }
+}
 bool ChessBoard::isSrcDesValid(Coordinate src, Coordinate des){return true;}
 void ChessBoard::movePiece(Coordinate src, Coordinate des){}

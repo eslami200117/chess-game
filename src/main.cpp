@@ -4,18 +4,17 @@
 
 using namespace std;
 
-const string GAME_FILE_ADDRESS = "resource/board.txt";
+const string GAME_FILE_ADDRESS = "resource/defualt.txt";
 
 int main(){
-    ChessBoard chessBoard;
-    chessBoard.loadGame(GAME_FILE_ADDRESS);
+    ChessBoard chessBoard(GAME_FILE_ADDRESS);
+    chessBoard.loadGame();
     chessBoard.printBoard();
     while(!chessBoard.isDone()){
         chessBoard.executeCommand();
         chessBoard.nextTurn();
         chessBoard.printBoard();
     }
-    chessBoard.saveGame(GAME_FILE_ADDRESS);
 
     return 0;
 }
