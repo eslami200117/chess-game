@@ -221,5 +221,17 @@ bool ChessBoard::isOpponent(Coordinate des) const{
     return true;
 }
 
-bool ChessBoard::isSrcDesValid(Coordinate src, Coordinate des){return true;}
+bool ChessBoard::isSrcDesValid(Coordinate src, Coordinate des) {
+    if (!m_board[src.x][src.y]) return false;
+
+    std::vector<Coordinate> allDes = m_board[src.x][src.y]->availableMoves(*this);
+
+    for (const auto& move : allDes) {
+        if (move == des) {
+            return true;
+        }
+    }
+
+    return false;
+}
 void ChessBoard::movePiece(Coordinate src, Coordinate des){}
