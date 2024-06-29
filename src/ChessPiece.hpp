@@ -10,60 +10,56 @@ class ChessBoard;
 
 class ChessPiece {
 public:
-    ChessPiece(bool, Coordinate, std::shared_ptr<MoveStrategy>, std::vector<Coordinate>);
-    ~ChessPiece() = default;
+    ChessPiece(bool, Coordinate, std::shared_ptr<MoveStrategy>, std::vector<Coordinate>, char);
+    virtual ~ChessPiece() = default;
     std::vector<Coordinate>availableMoves(ChessBoard&) const;
     bool getColor();
     void setCoordinate(Coordinate des);
-    virtual char getChar() const = 0;
+    char getChar() const;
+    
 
 protected:
-    bool m_color;
+    const bool m_color;
+    const char m_pieceChar;
     Coordinate m_coordinate;
     const std::vector<Coordinate> m_jump;
-    std::shared_ptr<MoveStrategy> m_strategy;
+    const std::shared_ptr<MoveStrategy> m_strategy;
 
 };
 
 
 class King : public ChessPiece{
 public:
-    King(bool, Coordinate);
+    King(bool, Coordinate, char);
     ~King() = default;
-    char getChar() const override;
 };
 
 class Queen : public ChessPiece{
 public:
-    Queen(bool, Coordinate);
+    Queen(bool, Coordinate, char);
     ~Queen() = default;
-    char getChar() const override;
 };
 
 class Rook : public ChessPiece{
 public:
-    Rook(bool, Coordinate);
+    Rook(bool, Coordinate, char);
     ~Rook() = default;
-    char getChar() const override;
 };
 
 class Bishop : public ChessPiece{
 public:
-    Bishop(bool, Coordinate);
+    Bishop(bool, Coordinate, char);
     ~Bishop() = default;
-    char getChar() const override;
 };
 
 class Knight : public ChessPiece{
 public:
-    Knight(bool, Coordinate);
+    Knight(bool, Coordinate, char);
     ~Knight() = default;
-    char getChar() const override;
 };
 
 class Pawn : public ChessPiece{
 public:
-    Pawn(bool, Coordinate);
+    Pawn(bool, Coordinate, char);
     ~Pawn() = default;
-    char getChar() const override;
 };

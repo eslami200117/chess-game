@@ -22,7 +22,7 @@ public:
     void loadGame();
     void saveGame(const std::string&) const;
     bool isValid(Coordinate);
-    bool isOccupied(Coordinate coordinate)const;
+    bool isOccupied(Coordinate) const;
     bool isOpponent(Coordinate) const;
     bool isDone();
     void nextTurn();
