@@ -190,7 +190,7 @@ string ChessBoard::reverseCoordinate(Coordinate coordinate) {
 bool ChessBoard::isValid(Coordinate coordinate){
     bool rangeValidate = false;
     bool emptyValidate = false;
-    if(-1 < coordinate.x  && coordinate.x < 8 && -1 < coordinate.y && coordinate.x < 8){
+    if(-1 < coordinate.x  && coordinate.x < 8 && -1 < coordinate.y && coordinate.y < 8){
         rangeValidate = true;
     } else return false;
 
